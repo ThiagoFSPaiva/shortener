@@ -6,5 +6,5 @@ import java.util.Optional;
 
 public interface UrlRepository {
     ShortenedUrl save(ShortenedUrl shortenedUrl);
-    Optional<ShortenedUrl> findShortByUrl(String originalUrl);
+    Optional<ShortenedUrl> findShortByUrl(String shortUrl);
 }
