@@ -3,24 +3,25 @@ package br.com.thiagofspaiva.shortener.application.factory;
 
 import br.com.thiagofspaiva.shortener.adapters.outbound.strategy.Base62Shortener;
 import br.com.thiagofspaiva.shortener.adapters.outbound.strategy.RandomHashShortener;
+import br.com.thiagofspaiva.shortener.domain.enums.ShortenerStrategyType;
 import br.com.thiagofspaiva.shortener.domain.ports.ShorteningStrategy;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
-@Repository
+import java.util.Map;
+
+@Component
 public class ShortenerFactory {
 
-    private final RandomHashShortener randomHashShortener;
-    private final Base62Shortener base62Shortener;
+    private Map<ShortenerStrategyType, Class<? extends ShorteningStrategy>> strategies = Map.of(
+            ShortenerStrategyType.RANDOM_HASH, RandomHashShortener.class,
+            ShortenerStrategyType.BASE62, Base62Shortener.class
+    );
 
-    public ShortenerFactory(RandomHashShortener randomHashShortener, Base62Shortener base62Shortener) {
-        this.randomHashShortener = randomHashShortener;
-        this.base62Shortener = base62Shortener;
-    }
-
-    public ShorteningStrategy getStrategy(String type) {
-        if (type.equalsIgnoreCase("random")) {
-            return randomHashShortener;
+    public ShorteningStrategy getStrategy(ShortenerStrategyType type) {
+        try {
+            return strategies.get(type).newInstance();
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Invalid strategy type");
         }
-        return base62Shortener;
     }
 }
