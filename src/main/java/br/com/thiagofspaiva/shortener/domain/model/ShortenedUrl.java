@@ -12,7 +12,7 @@ public class ShortenedUrl {
     private Long id;
 
     private String originalUrl;
-    private String shortUrL;
+    private String shortUrl;
     private LocalDateTime createdAt;
     private int accesCount;
 
@@ -20,10 +20,10 @@ public class ShortenedUrl {
         this.createdAt = LocalDateTime.now();
     }
 
-    public ShortenedUrl(String originalUrl, String shortUrL) {
+    public ShortenedUrl(String originalUrl, String shortUrl) {
         this();
         this.originalUrl = originalUrl;
-        this.shortUrL = shortUrL;
+        this.shortUrl = shortUrl;
         this.accesCount = 0;
     }
 
