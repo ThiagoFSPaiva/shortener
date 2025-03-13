@@ -1,23 +1,24 @@
 package br.com.thiagofspaiva.shortener.adapters.inbound.controller;
 
+import br.com.thiagofspaiva.shortener.application.service.UrlAccessService;
 import br.com.thiagofspaiva.shortener.application.service.UrlShortenerService;
 import br.com.thiagofspaiva.shortener.domain.enums.ShortenerStrategyType;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/urls")
 public class UrlController {
     private final UrlShortenerService urlShortenerService;
+    private final UrlAccessService urlAccessService;
 
-    public UrlController(UrlShortenerService urlShortenerService) {
+    public UrlController(UrlShortenerService urlShortenerService, UrlAccessService urlAccessService) {
         this.urlShortenerService = urlShortenerService;
+        this.urlAccessService = urlAccessService;
     }
 
     @GetMapping("/shorten")

@@ -22,7 +22,7 @@ public class ShortenedUrl {
 
     public ShortenedUrl(String originalUrl, String shortUrl) {
         this();
-        this.originalUrl = originalUrl;
+        this.originalUrl = formatUrl(originalUrl);
         this.shortUrl = shortUrl;
         this.accesCount = 0;
     }
@@ -31,4 +31,14 @@ public class ShortenedUrl {
         this.accesCount++;
     }
 
+    private String formatUrl(String url) {
+        if (!url.startsWith("http://") && !url.startsWith("https://")) {
+            return "https://" + url;
+        }
+        return url;
+    }
+
+    public String getOriginalUrl() {
+        return originalUrl;
+    }
 }
