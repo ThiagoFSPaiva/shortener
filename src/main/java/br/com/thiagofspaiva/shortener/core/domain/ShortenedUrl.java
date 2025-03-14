@@ -45,4 +45,8 @@ public class ShortenedUrl {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "shortenedUrl", fetch = FetchType.LAZY)
     private Set<AccessLog> accessLogs;
+
+    public Set<AccessLog> getAccessLogs() {
+        return accessLogs;
+    }
 }

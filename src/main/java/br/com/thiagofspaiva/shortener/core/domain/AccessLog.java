@@ -38,4 +38,8 @@ public class AccessLog {
     public LocalDate getAccessDate() {
         return accessDate;
     }
+
+    public int getAccesCount() {
+        return accesCount;
+    }
 }
