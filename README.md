@@ -35,8 +35,6 @@ Este projeto segue a **Arquitetura Hexagonal**, organizando o código da seguint
 │   └── ports
 ```
 
-Aqui está a seção de camadas completa:  
-
 ## 📌 Camadas  
 
 - `application` contém os serviços da aplicação, que implementam a lógica de negócio. Inclui fábricas e DTOs para organizar os dados e operações essenciais.  
