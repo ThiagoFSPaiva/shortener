@@ -62,6 +62,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>shortener-tds</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

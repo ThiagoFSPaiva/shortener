@@ -5,7 +5,7 @@ url_prefix: http://localhost:8080
 
 spring:
   application:
-    name: encurtador-tds
+    name: shortener-tds
   datasource:
     url: jdbc:postgresql://localhost:5432/tds-shortener
     username: postgres

@@ -20,15 +20,8 @@ public class UrlShortenerService {
 
     public String shortenUrl(String originalUrl, ShortenerStrategyType strategy) {
         String shortUrl = shortenerFactory.getStrategy(strategy).generateShortUrl(originalUrl);
-        ShortenedUrl shortenedUrl = new ShortenedUrl(formatUrl(originalUrl), shortUrl);
+        ShortenedUrl shortenedUrl = new ShortenedUrl(originalUrl, shortUrl);
         urlRepository.save(shortenedUrl);
         return urlPrefix + "/" + shortUrl;
-    }
-
-    private String formatUrl(String url) {
-        if (!url.startsWith("http://") && !url.startsWith("https://")) {
-            return "https://" + url;
-        }
-        return url;
     }
 }

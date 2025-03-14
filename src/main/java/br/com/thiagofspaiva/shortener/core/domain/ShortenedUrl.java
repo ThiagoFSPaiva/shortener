@@ -17,6 +17,10 @@ public class ShortenedUrl {
     private String shortUrl;
     private LocalDateTime createdAt;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "shortenedUrl", fetch = FetchType.LAZY)
+    private Set<AccessLog> accessLogs;
+
     public ShortenedUrl() {
         this.createdAt = LocalDateTime.now();
     }
@@ -42,11 +46,11 @@ public class ShortenedUrl {
         return url;
     }
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "shortenedUrl", fetch = FetchType.LAZY)
-    private Set<AccessLog> accessLogs;
-
     public Set<AccessLog> getAccessLogs() {
         return accessLogs;
+    }
+
+    public String getShortUrl() {
+        return shortUrl;
     }
 }

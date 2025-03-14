@@ -1,5 +1,6 @@
 package br.com.thiagofspaiva.shortener.application.service;
 
+import br.com.thiagofspaiva.shortener.application.dto.UrlStatisticsDTO;
 import br.com.thiagofspaiva.shortener.core.domain.AccessLog;
 import br.com.thiagofspaiva.shortener.core.domain.ShortenedUrl;
 import br.com.thiagofspaiva.shortener.core.ports.AccessLogRepository;
@@ -12,12 +13,17 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
+@TestPropertySource(properties = {
+        "url_prefix=http://localhost:8080",
+})
 class UrlAccessServiceUnitTest {
 
     @Mock
@@ -81,16 +87,60 @@ class UrlAccessServiceUnitTest {
     }
 
     @Test
-    @DisplayName("Should return empty when total access count is not found")
+    @DisplayName("Should return empty statistic when total access count is not found")
     void ShoudReturnEmptyWhenTotalAccessCountIsNotFound() {
 
-        Mockito.when(accessLogRepository.getTotalAccessCount(Mockito.any())).thenReturn(null);
-        Mockito.when(accessLogRepository.getDistinctAccessDays(Mockito.any())).thenReturn(null);
+        Mockito.when(urlRepository.findByShortUrl(Mockito.any())).thenReturn(Optional.empty());
 
-        var result = urlAccessService.getStatistics("url");
+        var result = urlAccessService.getStatistics("shortened");
 
         assertTrue(result.isEmpty());
-
+        Mockito.verify(accessLogRepository, Mockito.never()).getTotalAccessCount(Mockito.any());
+        Mockito.verify(accessLogRepository, Mockito.never()).getDistinctAccessDays(Mockito.any());
     }
 
+    @Test
+    @DisplayName("Should return empty statistic when total access count is not found")
+    void shouldReturnEmptyStatisticWhenTotalAccessCountIsNotFound() {
+
+        var urlPrefix = "http://localhost:8080";
+        ReflectionTestUtils.setField(urlAccessService, "urlPrefix", urlPrefix);
+
+        var shortenedUrl = new ShortenedUrl("url", "shortened");
+        Mockito.when(urlRepository.findByShortUrl(Mockito.any())).thenReturn(Optional.of(shortenedUrl));
+
+        Mockito.when(accessLogRepository.getTotalAccessCount(Mockito.any())).thenReturn(null);
+
+        var result = urlAccessService.getStatistics("shortened");
+
+        var dto = new UrlStatisticsDTO(urlPrefix + "/" + shortenedUrl.getShortUrl(), 0, 0);
+
+        assertTrue(result.isPresent());
+        assertEquals(result.get().getTotalAccesses(), dto.getTotalAccesses());
+        assertEquals(result.get().getAverageAccessesPerDay(), dto.getAverageAccessesPerDay());
+        assertEquals(result.get().getShortUrl(), dto.getShortUrl());
+    }
+
+    @Test
+    @DisplayName("Should return statistic")
+    void shouldReturnStatistic() {
+        var urlPrefix = "http://localhost:8080";
+        ReflectionTestUtils.setField(urlAccessService, "urlPrefix", urlPrefix);
+
+        var shortenedUrl = new ShortenedUrl("url", "shortened");
+        Mockito.when(urlRepository.findByShortUrl(Mockito.any())).thenReturn(Optional.of(shortenedUrl));
+
+        Mockito.when(accessLogRepository.getTotalAccessCount(Mockito.any())).thenReturn(10L);
+
+        Mockito.when(accessLogRepository.getDistinctAccessDays(Mockito.any())).thenReturn(5L);
+
+        var result = urlAccessService.getStatistics("shortened");
+
+        var dto = new UrlStatisticsDTO(urlPrefix + "/" + shortenedUrl.getShortUrl(), 10, 2);
+
+        assertTrue(result.isPresent());
+        assertEquals(result.get().getTotalAccesses(), dto.getTotalAccesses());
+        assertEquals(result.get().getAverageAccessesPerDay(), dto.getAverageAccessesPerDay());
+        assertEquals(result.get().getShortUrl(), dto.getShortUrl());
+    }
 }
