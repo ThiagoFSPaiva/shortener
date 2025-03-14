@@ -11,7 +11,7 @@ Essa API REST permite o encurtamento de URLs e o rastreamento do número de aces
 - **Visualizar estatísticas**: Exibe o total de acessos e a média de acessos por dia.
 - **Swagger UI**: Documentação interativa da API.
 - **Versionamento da API**.
-- **Teste Unitário*.
+- **Teste Unitário**.
 
 ---
 
