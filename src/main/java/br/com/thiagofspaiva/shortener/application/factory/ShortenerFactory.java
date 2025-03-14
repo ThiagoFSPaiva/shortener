@@ -3,8 +3,8 @@ package br.com.thiagofspaiva.shortener.application.factory;
 
 import br.com.thiagofspaiva.shortener.adapters.outbound.strategy.Base62Shortener;
 import br.com.thiagofspaiva.shortener.adapters.outbound.strategy.RandomHashShortener;
-import br.com.thiagofspaiva.shortener.domain.enums.ShortenerStrategyType;
-import br.com.thiagofspaiva.shortener.domain.ports.ShorteningStrategy;
+import br.com.thiagofspaiva.shortener.core.enums.ShortenerStrategyType;
+import br.com.thiagofspaiva.shortener.core.ports.ShorteningStrategy;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;

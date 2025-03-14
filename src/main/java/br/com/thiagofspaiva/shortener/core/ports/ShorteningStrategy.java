@@ -1,4 +1,4 @@
-package br.com.thiagofspaiva.shortener.domain.ports;
+package br.com.thiagofspaiva.shortener.core.ports;
 
 public interface ShorteningStrategy {
     String generateShortUrl(String originalUrl);

@@ -1,8 +1,10 @@
-package br.com.thiagofspaiva.shortener.domain.model;
+package br.com.thiagofspaiva.shortener.core.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "shortened_urls")
@@ -14,7 +16,6 @@ public class ShortenedUrl {
     private String originalUrl;
     private String shortUrl;
     private LocalDateTime createdAt;
-    private int accesCount;
 
     public ShortenedUrl() {
         this.createdAt = LocalDateTime.now();
@@ -24,11 +25,14 @@ public class ShortenedUrl {
         this();
         this.originalUrl = formatUrl(originalUrl);
         this.shortUrl = shortUrl;
-        this.accesCount = 0;
     }
 
-    public void incrementAccessCount() {
-        this.accesCount++;
+    public Long getId() {
+        return id;
+    }
+
+    public String getOriginalUrl() {
+        return originalUrl;
     }
 
     private String formatUrl(String url) {
@@ -38,7 +42,7 @@ public class ShortenedUrl {
         return url;
     }
 
-    public String getOriginalUrl() {
-        return originalUrl;
-    }
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "shortenedUrl", fetch = FetchType.LAZY)
+    private Set<AccessLog> accessLogs;
 }

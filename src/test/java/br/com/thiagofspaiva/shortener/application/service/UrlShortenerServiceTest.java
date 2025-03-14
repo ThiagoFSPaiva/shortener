@@ -1,14 +1,11 @@
 package br.com.thiagofspaiva.shortener.application.service;
 
 import br.com.thiagofspaiva.shortener.application.factory.ShortenerFactory;
-import br.com.thiagofspaiva.shortener.domain.enums.ShortenerStrategyType;
-import br.com.thiagofspaiva.shortener.domain.model.ShortenedUrl;
-import br.com.thiagofspaiva.shortener.domain.ports.UrlRepository;
+import br.com.thiagofspaiva.shortener.core.enums.ShortenerStrategyType;
+import br.com.thiagofspaiva.shortener.core.domain.ShortenedUrl;
+import br.com.thiagofspaiva.shortener.core.ports.UrlRepository;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
-
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;

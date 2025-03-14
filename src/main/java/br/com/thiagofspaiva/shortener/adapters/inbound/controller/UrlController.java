@@ -2,12 +2,11 @@ package br.com.thiagofspaiva.shortener.adapters.inbound.controller;
 
 import br.com.thiagofspaiva.shortener.application.service.UrlAccessService;
 import br.com.thiagofspaiva.shortener.application.service.UrlShortenerService;
-import br.com.thiagofspaiva.shortener.domain.enums.ShortenerStrategyType;
+import br.com.thiagofspaiva.shortener.core.enums.ShortenerStrategyType;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.Map;
 
 @RestController
@@ -21,7 +20,7 @@ public class UrlController {
         this.urlAccessService = urlAccessService;
     }
 
-    @GetMapping("/shorten")
+    @PostMapping("/shorten")
     public ResponseEntity<Map<String,String>> shotenUrl(
             @RequestParam String url,
             @RequestParam(defaultValue = "BASE62") ShortenerStrategyType type

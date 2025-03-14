@@ -1,6 +1,6 @@
 package br.com.thiagofspaiva.shortener.adapters.outbound.strategy;
 
-import br.com.thiagofspaiva.shortener.domain.ports.ShorteningStrategy;
+import br.com.thiagofspaiva.shortener.core.ports.ShorteningStrategy;
 import org.springframework.stereotype.Component;
 import org.springframework.util.DigestUtils;
 

@@ -1,6 +1,6 @@
-package br.com.thiagofspaiva.shortener.domain.ports;
+package br.com.thiagofspaiva.shortener.core.ports;
 
-import br.com.thiagofspaiva.shortener.domain.model.ShortenedUrl;
+import br.com.thiagofspaiva.shortener.core.domain.ShortenedUrl;
 
 import java.util.Optional;
 

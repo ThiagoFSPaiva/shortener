@@ -1,6 +1,8 @@
 server:
   port: 8080
 
+url_prefix: http://localhost:8080
+
 spring:
   application:
     name: encurtador-tds
