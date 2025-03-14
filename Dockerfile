@@ -1,10 +1,9 @@
-# Usando uma imagem do OpenJDK com Tomcat para rodar um WAR
-FROM tomcat:9-jdk17
-# Define o diretório de trabalho
-WORKDIR /usr/local/tomcat/webapps/
+FROM eclipse-temurin:17-jdk
 
-COPY target/shortener-tds.war /usr/local/tomcat/webapps/ROOT.war
+WORKDIR /app
+
+COPY target/shortener-tds.jar app.jar
 
 EXPOSE 8080
 
-CMD ["catalina.sh", "run"]
+CMD ["java", "-jar", "app.jar"]
