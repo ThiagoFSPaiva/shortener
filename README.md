@@ -19,7 +19,7 @@ Essa API REST permite o encurtamento de URLs e o rastreamento do número de aces
 Este projeto segue a **Arquitetura Hexagonal**, organizando o código da seguinte maneira:
 
 ```text
-./src/main/java/com/tdscompany/shortener
+./src/main/java/br/com/thiagofspaiva/shortener
 ├── adapters
 │   ├── inbound
 │   │   └── controller
