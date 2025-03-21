@@ -110,7 +110,7 @@ GET /{shortUrl}
 
 ### 🔹 **Obter estatísticas**
 ```http
-GET /api/v1/urls/stats/{shortUrl}
+GET /api/v1/urls/{shortUrl}/stats
 ```
 **Resposta:**
 ```json
