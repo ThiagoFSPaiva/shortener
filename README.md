@@ -47,7 +47,7 @@ Este projeto segue a **Arquitetura Hexagonal**, organizando o código da seguint
 - **PostgreSQL**
 - **Docker e Docker Compose**
 - **Arquitetura Hexagonal**
-- **Padrões Strategy, Decorator e Factory Method**
+- **Padrões Strategy e Factory Method**
 - **Swagger para documentação**
 - **Junit + Mockito para teste unitário**
 
